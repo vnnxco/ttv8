@@ -57,7 +57,8 @@ const dashboardMetrics = [
     title: "Message Credits", 
     color: "text-orange-400",
     bgColor: "bg-orange-500/10",
-    data: "8.5K / 15K"
+    data: "8.5K",
+    subData: "15K"
   },
   { 
     icon: ClockIcon, 
@@ -71,7 +72,8 @@ const dashboardMetrics = [
     title: "Team Members", 
     color: "text-pink-400",
     bgColor: "bg-pink-500/10",
-    data: "2 / 3"
+    data: "2",
+    subData: "3"
   }
 ]
 
@@ -266,28 +268,39 @@ export function Homepage() {
             </div>
           </div>
 
-          {/* Dashboard Metrics Grid - Clean and Uniform with Left Alignment */}
+          {/* Dashboard Metrics Grid - Responsive and Uniform */}
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-6">
             {dashboardMetrics.map((metric, index) => (
               <div key={index} className="flex flex-col">
-                <Card className="bg-sidebar border-0 hover:bg-sidebar-accent transition-colors p-4 w-full cursor-default h-20 flex flex-col justify-between">
-                  <div className="flex items-center justify-between">
-                    <div className={`p-2 rounded-lg ${metric.bgColor}`}>
-                      <metric.icon className={`h-4 w-4 ${metric.color}`} />
+                <Card className="bg-sidebar border-0 hover:bg-sidebar-accent transition-colors p-3 w-full cursor-default aspect-square flex flex-col justify-between min-h-0">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className={`p-1.5 rounded-lg ${metric.bgColor} flex-shrink-0`}>
+                      <metric.icon className={`h-3 w-3 ${metric.color}`} />
                     </div>
                     {metric.trend && (
-                      <TrendingUpIcon className="h-3 w-3 text-green-500" />
+                      <TrendingUpIcon className="h-3 w-3 text-green-500 flex-shrink-0" />
                     )}
                   </div>
                   
-                  <div className="text-left">
-                    <span className="text-lg font-bold text-sidebar-foreground">{metric.data}</span>
+                  <div className="text-left min-h-0 flex-1 flex flex-col justify-end">
+                    <div className="flex items-baseline gap-1 flex-wrap">
+                      <span className="text-base sm:text-lg font-bold text-sidebar-foreground leading-none">
+                        {metric.data}
+                      </span>
+                      {metric.subData && (
+                        <span className="text-xs text-sidebar-foreground/60 leading-none">
+                          / {metric.subData}
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </Card>
                 
                 {/* Title below the card */}
                 <div className="mt-2 px-1">
-                  <p className="text-xs font-medium text-sidebar-foreground/80 text-left">{metric.title}</p>
+                  <p className="text-xs font-medium text-sidebar-foreground/80 text-left leading-tight">
+                    {metric.title}
+                  </p>
                 </div>
               </div>
             ))}
