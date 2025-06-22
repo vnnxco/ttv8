@@ -1,28 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { 
-  PlusIcon,
-  BotIcon,
-  MessageSquareIcon,
-  DatabaseIcon,
-  BarChartIcon,
-  SettingsIcon,
-  ZapIcon,
-  SparklesIcon,
-  BrainIcon,
-  StarIcon,
-  TrendingUpIcon,
-  ClockIcon,
-  UsersIcon,
-  FolderIcon,
-  AlertTriangleIcon,
-  BugIcon,
-  WifiOffIcon,
-  ShieldAlertIcon,
-  HelpCircleIcon,
-  ExclamationTriangleIcon
-} from "lucide-react"
+import { PlusIcon, BotIcon, MessageSquareIcon, DatabaseIcon, BarChartIcon, SettingsIcon, ZapIcon, SparklesIcon, BrainIcon, StarIcon, TrendingUpIcon, ClockIcon, UsersIcon, FolderIcon, AlertTriangleIcon, BugIcon, WifiOffIcon, ShieldAlertIcon, HelpCircleIcon, TriangleIcon as ExclamationTriangleIcon } from "lucide-react"
 
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
