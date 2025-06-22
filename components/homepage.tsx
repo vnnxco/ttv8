@@ -1,7 +1,29 @@
 "use client"
 
 import * as React from "react"
-import { PlusIcon, BotIcon, MessageSquareIcon, DatabaseIcon, BarChartIcon, SettingsIcon, ZapIcon, SparklesIcon, BrainIcon, StarIcon, TrendingUpIcon, ClockIcon, UsersIcon, FolderIcon, AlertTriangleIcon, BugIcon, WifiOffIcon, ShieldAlertIcon, HelpCircleIcon, TriangleIcon as ExclamationTriangleIcon } from "lucide-react"
+import { 
+  PlusIcon,
+  BotIcon,
+  MessageSquareIcon,
+  DatabaseIcon,
+  BarChartIcon,
+  SettingsIcon,
+  ZapIcon,
+  ClockIcon,
+  UsersIcon,
+  FolderIcon,
+  AlertTriangleIcon,
+  BugIcon,
+  ShieldAlertIcon,
+  HelpCircleIcon,
+  TrendingUpIcon,
+  CheckCircleIcon,
+  XCircleIcon,
+  ClockIcon as PendingIcon,
+  StarIcon,
+  ThumbsUpIcon,
+  MessageCircleIcon
+} from "lucide-react"
 
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -13,8 +35,7 @@ const dashboardMetrics = [
     title: "Active Projects", 
     color: "text-blue-400",
     bgColor: "bg-blue-500/10",
-    data: "3",
-    subtitle: "View and manage your projects"
+    data: "3"
   },
   { 
     icon: MessageSquareIcon, 
@@ -22,7 +43,6 @@ const dashboardMetrics = [
     color: "text-green-400",
     bgColor: "bg-green-500/10",
     data: "1,284",
-    subtitle: "+15% from last month",
     trend: true
   },
   { 
@@ -30,32 +50,28 @@ const dashboardMetrics = [
     title: "Knowledge Sources", 
     color: "text-purple-400",
     bgColor: "bg-purple-500/10",
-    data: "12",
-    subtitle: "Documents & websites in your library"
+    data: "12"
   },
   { 
     icon: ZapIcon, 
-    title: "Message Credits Used", 
+    title: "Message Credits", 
     color: "text-orange-400",
     bgColor: "bg-orange-500/10",
-    data: "8,500 / 15,000",
-    subtitle: "72% of monthly credits used"
+    data: "8.5K / 15K"
   },
   { 
     icon: ClockIcon, 
-    title: "Avg. Response Time", 
+    title: "Response Time", 
     color: "text-cyan-400",
     bgColor: "bg-cyan-500/10",
-    data: "1.8s",
-    subtitle: "AI performance"
+    data: "1.8s"
   },
   { 
     icon: UsersIcon, 
     title: "Team Members", 
     color: "text-pink-400",
     bgColor: "bg-pink-500/10",
-    data: "2 / 3",
-    subtitle: "Invite and manage collaborators"
+    data: "2 / 3"
   }
 ]
 
@@ -107,18 +123,54 @@ const issueReports = [
     icon: BugIcon,
     bgColor: "bg-blue-500",
     status: "pending"
+  }
+]
+
+const recentActivity = [
+  {
+    id: 1,
+    type: "project_created",
+    title: "New project 'Customer Support Bot' created",
+    user: "Sarah Chen",
+    timeAgo: "5 minutes ago",
+    icon: PlusIcon,
+    bgColor: "bg-green-500"
+  },
+  {
+    id: 2,
+    type: "knowledge_added",
+    title: "Added 15 new documents to knowledge base",
+    user: "Mike Johnson",
+    timeAgo: "20 minutes ago",
+    icon: DatabaseIcon,
+    bgColor: "bg-blue-500"
+  },
+  {
+    id: 3,
+    type: "ai_trained",
+    title: "AI model training completed successfully",
+    user: "System",
+    timeAgo: "1 hour ago",
+    icon: BotIcon,
+    bgColor: "bg-purple-500"
+  },
+  {
+    id: 4,
+    type: "team_joined",
+    title: "Alex Rodriguez joined the team",
+    user: "Admin",
+    timeAgo: "2 hours ago",
+    icon: UsersIcon,
+    bgColor: "bg-pink-500"
   },
   {
     id: 5,
-    title: "Export Feature Not Working",
-    description: "CSV export button not responding in analytics section",
-    priority: "low",
-    reportedBy: "David Kim",
-    timeAgo: "1 day ago",
-    reportCount: 2,
-    icon: ExclamationTriangleIcon,
-    bgColor: "bg-gray-500",
-    status: "pending"
+    type: "feedback_received",
+    title: "Received 5-star rating from customer",
+    user: "Customer Portal",
+    timeAgo: "3 hours ago",
+    icon: StarIcon,
+    bgColor: "bg-yellow-500"
   }
 ]
 
@@ -214,33 +266,28 @@ export function Homepage() {
             </div>
           </div>
 
-          {/* Dashboard Metrics Grid - Uniform Size Cards */}
+          {/* Dashboard Metrics Grid - Clean and Uniform */}
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-6">
             {dashboardMetrics.map((metric, index) => (
               <div key={index} className="flex flex-col">
-                <Card
-                  className="bg-sidebar border-0 hover:bg-sidebar-accent transition-colors p-4 w-full cursor-default h-24 flex flex-col justify-between"
-                >
-                  <div className="flex items-center gap-3">
+                <Card className="bg-sidebar border-0 hover:bg-sidebar-accent transition-colors p-4 w-full cursor-default h-20 flex flex-col justify-between">
+                  <div className="flex items-center justify-between">
                     <div className={`p-2 rounded-lg ${metric.bgColor}`}>
                       <metric.icon className={`h-4 w-4 ${metric.color}`} />
                     </div>
+                    {metric.trend && (
+                      <TrendingUpIcon className="h-3 w-3 text-green-500" />
+                    )}
                   </div>
                   
-                  <div className="space-y-1">
-                    <div className="flex items-baseline gap-1">
-                      <span className="text-xl font-bold text-sidebar-foreground">{metric.data}</span>
-                      {metric.trend && (
-                        <TrendingUpIcon className="h-3 w-3 text-green-500" />
-                      )}
-                    </div>
-                    <p className="text-xs text-sidebar-foreground/60 leading-tight">{metric.subtitle}</p>
+                  <div className="text-right">
+                    <span className="text-xl font-bold text-sidebar-foreground">{metric.data}</span>
                   </div>
                 </Card>
                 
-                {/* Only title moved below the card */}
+                {/* Title below the card */}
                 <div className="mt-2 px-1">
-                  <p className="text-xs font-medium text-sidebar-foreground/80">{metric.title}</p>
+                  <p className="text-xs font-medium text-sidebar-foreground/80 text-center">{metric.title}</p>
                 </div>
               </div>
             ))}
@@ -358,81 +405,42 @@ export function Homepage() {
             </div>
           </div>
 
-          {/* Quick Actions / System Status */}
+          {/* Recent Activity - More Meaningful Than System Status */}
           <div>
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-semibold text-white">System Status</h2>
+              <h2 className="text-xl font-semibold text-white">Recent Activity</h2>
               <Button
                 variant="ghost"
                 size="sm"
                 className="text-gray-400 hover:text-white"
               >
-                View Details
+                View All
               </Button>
             </div>
             <div className="space-y-4">
-              {/* System Health Cards */}
-              <Card className="bg-sidebar border-0 hover:bg-sidebar-accent transition-colors p-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                    <div>
-                      <h3 className="text-sidebar-foreground font-medium text-sm">AI Services</h3>
-                      <p className="text-sidebar-foreground/70 text-xs">All systems operational</p>
+              {recentActivity.map((activity) => (
+                <Card
+                  key={activity.id}
+                  className="bg-sidebar border-0 hover:bg-sidebar-accent transition-colors cursor-pointer p-4"
+                >
+                  <div className="flex items-start gap-3">
+                    <div className={`${activity.bgColor} w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0`}>
+                      <activity.icon className="h-4 w-4 text-white" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-sidebar-foreground font-medium text-sm line-clamp-2 leading-relaxed mb-2">
+                        {activity.title}
+                      </h3>
+                      <div className="flex items-center justify-between text-xs text-sidebar-foreground/60">
+                        <span>By {activity.user}</span>
+                        <span>{activity.timeAgo}</span>
+                      </div>
                     </div>
                   </div>
-                  <Badge variant="outline" className="bg-green-500/10 text-green-500 border-green-500/20 text-xs">
-                    99.9% uptime
-                  </Badge>
-                </div>
-              </Card>
-
-              <Card className="bg-sidebar border-0 hover:bg-sidebar-accent transition-colors p-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                    <div>
-                      <h3 className="text-sidebar-foreground font-medium text-sm">Database</h3>
-                      <p className="text-sidebar-foreground/70 text-xs">Minor performance issues</p>
-                    </div>
-                  </div>
-                  <Badge variant="outline" className="bg-yellow-500/10 text-yellow-500 border-yellow-500/20 text-xs">
-                    Monitoring
-                  </Badge>
-                </div>
-              </Card>
-
-              <Card className="bg-sidebar border-0 hover:bg-sidebar-accent transition-colors p-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                    <div>
-                      <h3 className="text-sidebar-foreground font-medium text-sm">API Gateway</h3>
-                      <p className="text-sidebar-foreground/70 text-xs">Running smoothly</p>
-                    </div>
-                  </div>
-                  <Badge variant="outline" className="bg-green-500/10 text-green-500 border-green-500/20 text-xs">
-                    Healthy
-                  </Badge>
-                </div>
-              </Card>
-
-              <Card className="bg-sidebar border-0 hover:bg-sidebar-accent transition-colors p-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                    <div>
-                      <h3 className="text-sidebar-foreground font-medium text-sm">CDN & Storage</h3>
-                      <p className="text-sidebar-foreground/70 text-xs">Optimal performance</p>
-                    </div>
-                  </div>
-                  <Badge variant="outline" className="bg-green-500/10 text-green-500 border-green-500/20 text-xs">
-                    Operational
-                  </Badge>
-                </div>
-              </Card>
-
-              {/* Quick Actions */}
+                </Card>
+              ))}
+              
+              {/* Quick Actions at the bottom */}
               <div className="pt-4 border-t border-sidebar-border">
                 <h3 className="text-sidebar-foreground font-medium text-sm mb-3">Quick Actions</h3>
                 <div className="grid grid-cols-2 gap-3">
