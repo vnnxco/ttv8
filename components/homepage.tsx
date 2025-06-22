@@ -6,7 +6,6 @@ import { PlusIcon, BotIcon, MessageSquareIcon, DatabaseIcon, BarChartIcon, Setti
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Progress } from '@/components/ui/progress'
 
 const dashboardMetrics = [
   { 
@@ -40,8 +39,7 @@ const dashboardMetrics = [
     color: "text-orange-400",
     bgColor: "bg-orange-500/10",
     data: "8,500 / 15,000",
-    subtitle: "72% of monthly credits used",
-    progress: 72
+    subtitle: "72% of monthly credits used"
   },
   { 
     icon: ClockIcon, 
@@ -216,39 +214,33 @@ export function Homepage() {
             </div>
           </div>
 
-          {/* Dashboard Metrics Grid - Compact Version */}
+          {/* Dashboard Metrics Grid - Uniform Size Cards */}
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-6">
             {dashboardMetrics.map((metric, index) => (
               <div key={index} className="flex flex-col">
                 <Card
-                  className={`bg-sidebar border-0 hover:bg-sidebar-accent transition-colors p-4 w-full cursor-default`}
+                  className="bg-sidebar border-0 hover:bg-sidebar-accent transition-colors p-4 w-full cursor-default h-24 flex flex-col justify-between"
                 >
-                  <div className="flex items-center gap-3 mb-3">
+                  <div className="flex items-center gap-3">
                     <div className={`p-2 rounded-lg ${metric.bgColor}`}>
                       <metric.icon className={`h-4 w-4 ${metric.color}`} />
                     </div>
                   </div>
                   
-                  <div className="space-y-2">
+                  <div className="space-y-1">
                     <div className="flex items-baseline gap-1">
                       <span className="text-xl font-bold text-sidebar-foreground">{metric.data}</span>
                       {metric.trend && (
                         <TrendingUpIcon className="h-3 w-3 text-green-500" />
                       )}
                     </div>
-                    
-                    {metric.progress && (
-                      <div className="space-y-1">
-                        <Progress value={metric.progress} className="h-1.5" />
-                      </div>
-                    )}
+                    <p className="text-xs text-sidebar-foreground/60 leading-tight">{metric.subtitle}</p>
                   </div>
                 </Card>
                 
-                {/* Text moved below the card */}
+                {/* Only title moved below the card */}
                 <div className="mt-2 px-1">
-                  <p className="text-xs font-medium text-sidebar-foreground/80 mb-1">{metric.title}</p>
-                  <p className="text-xs text-sidebar-foreground/60 leading-tight">{metric.subtitle}</p>
+                  <p className="text-xs font-medium text-sidebar-foreground/80">{metric.title}</p>
                 </div>
               </div>
             ))}
