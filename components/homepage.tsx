@@ -266,7 +266,7 @@ export function Homepage() {
             </div>
           </div>
 
-          {/* Dashboard Metrics Grid - Clean and Uniform */}
+          {/* Dashboard Metrics Grid - Clean and Uniform with Left Alignment */}
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-6">
             {dashboardMetrics.map((metric, index) => (
               <div key={index} className="flex flex-col">
@@ -280,14 +280,14 @@ export function Homepage() {
                     )}
                   </div>
                   
-                  <div className="text-right">
-                    <span className="text-xl font-bold text-sidebar-foreground">{metric.data}</span>
+                  <div className="text-left">
+                    <span className="text-lg font-bold text-sidebar-foreground">{metric.data}</span>
                   </div>
                 </Card>
                 
                 {/* Title below the card */}
                 <div className="mt-2 px-1">
-                  <p className="text-xs font-medium text-sidebar-foreground/80 text-center">{metric.title}</p>
+                  <p className="text-xs font-medium text-sidebar-foreground/80 text-left">{metric.title}</p>
                 </div>
               </div>
             ))}
@@ -405,7 +405,7 @@ export function Homepage() {
             </div>
           </div>
 
-          {/* Recent Activity - More Meaningful Than System Status */}
+          {/* Recent Activity */}
           <div>
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-xl font-semibold text-white">Recent Activity</h2>
@@ -439,45 +439,6 @@ export function Homepage() {
                   </div>
                 </Card>
               ))}
-              
-              {/* Quick Actions at the bottom */}
-              <div className="pt-4 border-t border-sidebar-border">
-                <h3 className="text-sidebar-foreground font-medium text-sm mb-3">Quick Actions</h3>
-                <div className="grid grid-cols-2 gap-3">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="bg-sidebar-accent border-sidebar-border text-sidebar-foreground hover:bg-sidebar-accent/80 justify-start"
-                  >
-                    <PlusIcon className="h-4 w-4 mr-2" />
-                    New Project
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="bg-sidebar-accent border-sidebar-border text-sidebar-foreground hover:bg-sidebar-accent/80 justify-start"
-                  >
-                    <DatabaseIcon className="h-4 w-4 mr-2" />
-                    Add Data
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="bg-sidebar-accent border-sidebar-border text-sidebar-foreground hover:bg-sidebar-accent/80 justify-start"
-                  >
-                    <BotIcon className="h-4 w-4 mr-2" />
-                    Test AI
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="bg-sidebar-accent border-sidebar-border text-sidebar-foreground hover:bg-sidebar-accent/80 justify-start"
-                  >
-                    <BarChartIcon className="h-4 w-4 mr-2" />
-                    Analytics
-                  </Button>
-                </div>
-              </div>
             </div>
           </div>
         </div>
