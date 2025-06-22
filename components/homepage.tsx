@@ -268,27 +268,27 @@ export function Homepage() {
             </div>
           </div>
 
-          {/* Dashboard Metrics Grid - Responsive and Uniform */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-6">
+          {/* Dashboard Metrics Grid - Mobile: 3 cols, Desktop: 6 cols with better proportions */}
+          <div className="grid grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 mb-6">
             {dashboardMetrics.map((metric, index) => (
               <div key={index} className="flex flex-col">
-                <Card className="bg-sidebar border-0 hover:bg-sidebar-accent transition-colors p-3 w-full cursor-default aspect-square flex flex-col justify-between min-h-0">
-                  <div className="flex items-center justify-between mb-2">
+                <Card className="bg-sidebar border-0 hover:bg-sidebar-accent transition-colors w-full cursor-default h-20 sm:h-24 lg:h-20 xl:h-24 flex flex-col justify-between p-3">
+                  <div className="flex items-center justify-between">
                     <div className={`p-1.5 rounded-lg ${metric.bgColor} flex-shrink-0`}>
-                      <metric.icon className={`h-3 w-3 ${metric.color}`} />
+                      <metric.icon className={`h-3 w-3 sm:h-4 sm:w-4 ${metric.color}`} />
                     </div>
                     {metric.trend && (
                       <TrendingUpIcon className="h-3 w-3 text-green-500 flex-shrink-0" />
                     )}
                   </div>
                   
-                  <div className="text-left min-h-0 flex-1 flex flex-col justify-end">
+                  <div className="text-left">
                     <div className="flex items-baseline gap-1 flex-wrap">
-                      <span className="text-base sm:text-lg font-bold text-sidebar-foreground leading-none">
+                      <span className="text-lg sm:text-xl lg:text-lg xl:text-xl font-bold text-sidebar-foreground leading-none">
                         {metric.data}
                       </span>
                       {metric.subData && (
-                        <span className="text-xs text-sidebar-foreground/60 leading-none">
+                        <span className="text-xs text-sidebar-foreground/60 leading-none font-normal">
                           / {metric.subData}
                         </span>
                       )}
